@@ -1,0 +1,16 @@
+h1 {
+	color: cyan;
+}
+
+p {
+	color: orange;
+}
+
+.hobbies {
+	color: red;
+}
+
+.hobbies li {
+	display: inline;
+	margin: 20px;
+}
