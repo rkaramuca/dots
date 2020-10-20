@@ -56,6 +56,7 @@ set autowrite           " Automatically save before commands like :next and
 
 " MY PERSONAL ADDITIONS
 set number              " Show line numbers 
+set tabstop=4		" set tabbing to be 4 spaces
 set wrap                " Automatically wrap text that extends beyond the
 
 " Source a global configuration file if available
