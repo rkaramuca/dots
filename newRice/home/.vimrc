@@ -27,7 +27,7 @@
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 if has("syntax")
-  syntax on
+	syntax on
 endif
 
 " If using a dark background within the editing area and syntax
@@ -58,6 +58,7 @@ set autowrite           " Automatically save before commands like :next and
 set number              " Show line numbers 
 set tabstop=4		" set tabbing to be 4 spaces
 set wrap                " Automatically wrap text that extends beyond the
+highlight LineNr ctermfg=lightBlue guifg=lightBlue
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")

@@ -1,0 +1,1 @@
+syncolor.vim goes in /usr/share/vim/vim{version}/syntax/

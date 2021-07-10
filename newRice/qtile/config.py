@@ -30,14 +30,18 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+
+################################################################################
 import os
 import subprocess
-
+from libqtile import hook
 # startup hooks
-#@hook.subscribe.startup_once
-#def autostart():
-#	home = os.path.expanduser('~/.config/qtile/autostart.sh')
-#	subprocess.call([home])
+@hook.subscribe.startup_once
+def autostart():
+	home = os.path.expanduser('~/.config/qtile/autostart.sh')
+	subprocess.call([home])
+
+################################################################################
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -119,7 +123,13 @@ for i in groups:
 layouts = [
 	# margin=8 adds gaps of size 8
     layout.Columns(
-		border_focus_stack='#d75f5f',
+		border_focus='#9aedfe',
+		border_focus_stack='#9aedfe',
+		border_normal='#caa9fa',
+		border_normal_stack='#caa9fa',
+		border_on_single='#caa9fa',
+		border_width=6,
+		insert_position=1,
 		margin=8,
 		),
     layout.Max(),
@@ -147,30 +157,32 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.CurrentLayout(),
+				widget.CurrentLayout(),
 				# display the current group
-                widget.GroupBox(),
-                widget.Prompt(),
+				widget.GroupBox(),
+				widget.Prompt(),
 				# display the name of the window with focus
-                #widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        'launch': ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
+				#widget.WindowName(),
+				widget.Chord(
+					chords_colors={
+						'launch': ("#ff0000", "#ffffff"),
+					},
+					name_transform=lambda name: name.upper(),
+				),
 				# add a textbox to the top bar
-                #widget.TextBox("default config", name="default"),
-                #widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+				#widget.TextBox("default config", name="default"),
+				#widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
 
 				# Creates a spacer that is equal to the right alignment of the widgets
 				widget.Spacer(length=bar.STRETCH),
-                widget.Systray(),
-                widget.Clock(format='%m-%d-%Y %a %I:%M %p'),
-				widget.Battery(),
-                widget.QuickExit(),
+				widget.Systray(),
+				widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
+				widget.Volume(),
+				widget.Wlan(),
+				widget.BatteryIcon(),
+				widget.QuickExit(),
             ],
-            30,
+            40,
         ),
     ),
 
@@ -197,7 +209,7 @@ screens = [
 				# Creates a spacer that is equal to the right alignment of the widgets
 				widget.Spacer(length=bar.STRETCH),
 				widget.Systray(),
-				widget.Clock(format='%m-%d-%Y %a %I:%M %p'),
+				widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
 				widget.Volume(),
 				widget.Wlan(),
 				widget.BatteryIcon(),
