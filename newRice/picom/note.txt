@@ -1,1 +1,1 @@
-move picom.conf into /etc/xdg/picom.conf
+# Changes border opacity and window dropdowns/menus to 1
