@@ -1,0 +1,1 @@
+move picom.conf into /etc/xdg/picom.conf
