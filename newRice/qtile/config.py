@@ -101,9 +101,18 @@ keys = [
 
 	# Custom Keybinds
 	Key([mod], "b", lazy.spawn("firefox"), desc="Launch Firefox"),
+	Key([mod], "s", lazy.spawn("spotify"), desc="Launch Spotify"),
 ]
 
-groups = [Group(i) for i in "12345"]
+#groups = [Group(i) for i in "12345"]
+groups = [
+	Group("1", label=""),
+	Group("2", label="︁"),
+	Group("3", label="︁"),
+	Group("4", label=""),
+	Group("5", label=""),
+]
+
 
 for i in groups:
     keys.extend([
@@ -175,12 +184,12 @@ screens = [
 
 				# Creates a spacer that is equal to the right alignment of the widgets
 				widget.Spacer(length=bar.STRETCH),
-				widget.Systray(),
 				widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
+				widget.Spacer(length=bar.STRETCH),
 				widget.Volume(),
 				widget.Wlan(),
-				widget.BatteryIcon(),
-				widget.QuickExit(),
+				#widget.BatteryIcon(),
+				widget.Battery(format='Battery: {percent:2.0%}')
             ],
             40,
         ),
@@ -206,14 +215,16 @@ screens = [
 				#widget.TextBox("default config", name="default"),
 				#widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
 
+				#widget.Systray(),
 				# Creates a spacer that is equal to the right alignment of the widgets
 				widget.Spacer(length=bar.STRETCH),
-				widget.Systray(),
 				widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
+				widget.Spacer(length=bar.STRETCH),
 				widget.Volume(),
 				widget.Wlan(),
-				widget.BatteryIcon(),
-				widget.QuickExit(),
+				#widget.BatteryIcon(),
+				widget.TextBox(text='Battery:', font='Source Code Pro', background='#ff00ff'),
+				widget.Battery(format='{percent: 2.0%}', font='Source Code Pro', background='#ff00ff')
 			],
 			30,
 		),
