@@ -96,13 +96,22 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     #Key([mod], "r", lazy.spawncmd(),
         #desc="Spawn a command using a prompt widget"),
-    Key([mod], "r", lazy.spawn("dmenu_run"),
+    Key([mod], "r", lazy.spawn("dmenu_run -fn 'Ubuntu Mono:regular:pixelsize=18' -nb '#282a36' -nf '#caa9fa' -sf '#f8f8f2' -sb '#8be9fd'"),
         desc="Runs dmenu"),
 
-	# Custom Keybinds
+	# Custom Keybinds ##########################################################
+	# Application Launches
 	Key([mod], "b", lazy.spawn("firefox"), desc="Launch Firefox"),
+	Key([mod], "v", lazy.spawn("code"), desc="Launch VSCode"),
+	Key([mod], "d", lazy.spawn("discord"), desc="Launch Discord"),
 	Key([mod], "s", lazy.spawn("spotify"), desc="Launch Spotify"),
+	# Screen Shot
 	Key([mod], "p", lazy.spawn("flameshot gui"), desc="Screenshot via flameshot"),
+	# Audio Controls
+	Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2%+"), desc="Volume increase"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2%-"), desc="Volume decrease"),
+	Key([], "XF86AudioMute", lazy.spawn("amixer -c 0 -q set Master toggle"), desc="Volume mute"),
+	############################################################################
 ]
 
 # Colors List
@@ -226,15 +235,25 @@ screens = [
 				widget.Spacer(length=bar.STRETCH),
 				# Add Volume with arrow
 				widget.TextBox(text="", foreground=colors[3], padding=0, fontsize=41),
-				widget.TextBox(text="", foreground=colors[0], background=colors[3], emoji=True),
-				widget.Volume(foreground=colors[0], background=colors[3], padding=5),
+				widget.TextBox(text="", foreground=colors[0], background=colors[3]),
+				widget.Volume(foreground=colors[0],	background=colors[3], padding=5),
 				# Add Network information with arrow
 				widget.TextBox(text="", foreground=colors[1], background=colors[3], padding=0, fontsize=41),
 				widget.Wlan(foreground=colors[0], background=colors[1], padding=5, disconnected_message='None :(', format='  {quality}/70'),
 				# Add Battery Status with arrow
 				widget.TextBox(text="", foreground=colors[3], background=colors[1], padding=0, fontsize=41),
-				widget.TextBox(text='', foreground=colors[0], background=colors[3]),
-				widget.Battery(foreground=colors[0], background=colors[3], padding=5, format='{percent: 2.0%}'),
+				widget.Battery(
+					charge_char="",
+					discharge_char="",
+					empty_char="",
+					full_char="",
+					show_short_text=False,
+					low_foreground=colors[4],
+					foreground=colors[0], 
+					background=colors[3], 
+					padding=5, 
+					format='{char} {percent: 2.0%}'
+					),
 				# Add Clock with arrow
 				widget.TextBox(text="", foreground=colors[1], background=colors[3], padding=0, fontsize=41),
 				widget.TextBox(text='', foreground=colors[0], background=colors[1]),
@@ -296,15 +315,25 @@ screens = [
 				widget.Spacer(length=bar.STRETCH),
 				# Add Volume with arrow
 				widget.TextBox(text="", foreground=colors[3], padding=0, fontsize=41),
-				widget.TextBox(text="", foreground=colors[0], background=colors[3], emoji=True),
+				widget.TextBox(text="", foreground=colors[0], background=colors[3]),
 				widget.Volume(foreground=colors[0], background=colors[3], padding=5),
 				# Add Network information with arrow
 				widget.TextBox(text="", foreground=colors[1], background=colors[3], padding=0, fontsize=41),
 				widget.Wlan(foreground=colors[0], background=colors[1], padding=5, disconnected_message='None :(', format='  {quality}/70'),
 				# Add Battery Status with arrow
 				widget.TextBox(text="", foreground=colors[3], background=colors[1], padding=0, fontsize=41),
-				widget.TextBox(text='', foreground=colors[0], background=colors[3]),
-				widget.Battery(foreground=colors[0], background=colors[3], padding=5, format='{percent: 2.0%}'),
+				widget.Battery(
+					charge_char="",
+					discharge_char="",
+					empty_char="",
+					full_char="",
+					show_short_text=False,
+					low_foreground=colors[4],
+					foreground=colors[0], 
+					background=colors[3], 
+					padding=5, 
+					format='{char} {percent: 2.0%}'
+					),
 				# Add Clock with arrow
 				widget.TextBox(text="", foreground=colors[1], background=colors[3], padding=0, fontsize=41),
 				widget.TextBox(text='', foreground=colors[0], background=colors[1]),
