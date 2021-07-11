@@ -102,6 +102,7 @@ keys = [
 	# Custom Keybinds
 	Key([mod], "b", lazy.spawn("firefox"), desc="Launch Firefox"),
 	Key([mod], "s", lazy.spawn("spotify"), desc="Launch Spotify"),
+	Key([mod], "p", lazy.spawn("flameshot gui"), desc="Screenshot via flameshot"),
 ]
 
 # Colors List
@@ -174,11 +175,37 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        top=bar.Bar(
-            [
-				widget.CurrentLayout(),
+		# add bar to the top of the screen
+		top=bar.Bar(
+			[
+				widget.Sep(
+					linewidth=0,
+					padding=6,
+					background=colors[3]
+					),
+				widget.CurrentLayout(padding=5),
 				# display the current group
-				widget.GroupBox(),
+				widget.GroupBox(
+					margin_y=3,
+					margin_x=0,
+					padding_y=5,
+					padding_x=3,
+					borderwidth=3,
+					# any group with an open window will be white, otherwise purple
+					active=colors[2],
+					inactive=colors[1],
+					rounded=False,
+					# blue background if active
+					highlight_color=colors[3],
+					highlight_method="line",
+					# group "1" gets a pink underline, group "2" gets a blue underline
+					this_current_screen_border=colors[4],
+					this_screen_border=colors[3],
+					other_current_screen_border=colors[4],
+					other_screen_border=colors[3],
+					foreground=colors[2],
+					background=colors[0]
+					),
 				widget.Prompt(),
 				# display the name of the window with focus
 				#widget.WindowName(),
@@ -192,19 +219,30 @@ screens = [
 				#widget.TextBox("default config", name="default"),
 				#widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
 
+				#widget.Systray(),
+
 				# Creates a spacer that is equal to the right alignment of the widgets
 				widget.Spacer(length=bar.STRETCH),
-				widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-				widget.Spacer(length=bar.STRETCH),
-				widget.Volume(),
-				widget.Wlan(),
-				#widget.BatteryIcon(),
-				widget.Battery(format='Battery: {percent:2.0%}')
-            ],
-            40,
+				# Add Volume with arrow
+				widget.TextBox(text="", foreground=colors[3], padding=0, fontsize=41),
+				widget.TextBox(text="", foreground=colors[0], background=colors[3], emoji=True),
+				widget.Volume(foreground=colors[0], background=colors[3], padding=5),
+				# Add Network information with arrow
+				widget.TextBox(text="", foreground=colors[1], background=colors[3], padding=0, fontsize=41),
+				widget.Wlan(foreground=colors[0], background=colors[1], padding=5, disconnected_message='None :(', format='  {quality}/70'),
+				# Add Battery Status with arrow
+				widget.TextBox(text="", foreground=colors[3], background=colors[1], padding=0, fontsize=41),
+				widget.TextBox(text='', foreground=colors[0], background=colors[3]),
+				widget.Battery(foreground=colors[0], background=colors[3], padding=5, format='{percent: 2.0%}'),
+				# Add Clock with arrow
+				widget.TextBox(text="", foreground=colors[1], background=colors[3], padding=0, fontsize=41),
+				widget.TextBox(text='', foreground=colors[0], background=colors[1]),
+				widget.Clock(foreground=colors[0], background=colors[1], padding=5, format='%A, %B, %d - %H:%M ')
+			],
+			20,
 			background=colors[0],
-        ),
-    ),
+		),
+	),
 
 	Screen(
 		# add bar to the top of the screen
@@ -215,7 +253,7 @@ screens = [
 					padding=6,
 					background=colors[3]
 					),
-				widget.CurrentLayout(),
+				widget.CurrentLayout(padding=5),
 				# display the current group
 				widget.GroupBox(
 					margin_y=3,
