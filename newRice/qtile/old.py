@@ -313,12 +313,11 @@ screens = [
 					name_transform=lambda name: name.upper(),
 				),
 
-				# Create a Systray for WiFi/Volume
-				#widget.TextBox(text="", foreground=colors[3], padding=0, fontsize=41),
-				#widget.Systray(background=colors[3]),
-				
 				# Creates a spacer that is equal to the right alignment of the widgets
 				widget.Spacer(length=bar.STRETCH),
+				# Create a Systray for WiFi/Volume
+				widget.TextBox(text="", foreground=colors[3], padding=0, fontsize=41),
+				widget.Systray(background=colors[3]),
 				# Add Volume with arrow
 				widget.TextBox(text="", foreground=colors[1], padding=0, fontsize=41),
 				widget.TextBox(text="", foreground=colors[0], background=colors[1]),
