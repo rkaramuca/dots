@@ -96,7 +96,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     #Key([mod], "r", lazy.spawncmd(),
         #desc="Spawn a command using a prompt widget"),
-    Key([mod], "r", lazy.spawn("dmenu_run -fn 'Ubuntu Mono:regular:pixelsize=18' -nb '#282a36' -nf '#caa9fa' -sf '#f8f8f2' -sb '#8be9fd'"),
+    Key([mod], "r", lazy.spawn("dmenu_run -p Vampire -fn 'Ubuntu Mono:regular:pixelsize=18' -nb '#282a36' -nf '#caa9fa' -sf '#282a36' -sb '#8be9fd'"),
         desc="Runs dmenu"),
 
 	# Custom Keybinds ##########################################################
@@ -116,6 +116,9 @@ keys = [
 	# Backlight Controls
 	Key([mod], "period", lazy.spawn("brightnessctl -s set +10"), desc="Backlight increase"),
 	Key([mod], "comma", lazy.spawn("brightnessctl -s set 10-"), desc="Backlight decrease"),
+	# Launch WiFi Controller
+    Key([mod], "i", lazy.spawn("networkmanager_dmenu -p Vampire -fn 'Ubuntu Mono:regular:pixelsize=18' -nb '#282a36' -nf '#caa9fa' -sf '#272a36' -sb '#8be9fd'"),
+		desc="Runs dmenu NetworkManager Applet"),
 	############################################################################
 ]
 
